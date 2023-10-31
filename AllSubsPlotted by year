@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 30 10:27:50 2023
+
+@author: nathansmacbook
+"""
+
+import datetime as dt
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
+
+# Load your data from the CSV file
+EastSub = pd.read_csv('JetSuperpositions_EastSubtropicalDominant.csv')
+PolarDom = pd.read_csv('JetSuperpositions_PolarDominant.csv')
+SubtropicalDom = pd.read_csv('JetSuperpositions_SubtropicalDominant.csv')
+WestSubdom= pd.read_csv('JetSuperpositions_WestSubtropicalDominant.csv')
+Hybrid = pd.read_csv('JetSuperpositions_Hybrid.csv')
+
+
+
+# Extract EastSub latitude and longitude by year, 
+lats = EastSub['Event_Latitude']
+lons = EastSub['Event_Longitude']
+yearsEastSub = EastSub['Year']
+
+
+# Extract PolarDom latitude and longitude by year
+latsPolarDom = PolarDom['Event_Latitude']
+lonsPolarDom = PolarDom['Event_Longitude']
+yearsPolarDom = PolarDom['Year']
+
+# Extract SubtropicalDom latitude and longitude by year
+latsSubtropicalDom = SubtropicalDom['Event_Latitude']
+lonsSubtropicalDom = SubtropicalDom['Event_Longitude']
+yearsSubtropicalDom = SubtropicalDom['Year']
+
+# Extract WestSubDom latitude and longitude by year
+latsWestSubdom = WestSubdom['Event_Latitude']
+lonsWestSubdom = WestSubdom['Event_Longitude']
+yearsWestSubdom = WestSubdom['Year']
+
+# Extract Hybrid latitude and longitude by year
+latsHybrid = Hybrid['Event_Latitude']
+lonsHybrid = Hybrid['Event_Longitude']
+yearsHybrid = Hybrid['Year']
+
+
+
+# Sort the data by year 
+EastSub_byYear = EastSub.sort_values(by=['Year',])
+PolarDom_byYear = PolarDom.sort_values(by=['Year',])
+SubtropicalDom_byYear = SubtropicalDom.sort_values(by=['Year',])
+WestSubdom_byYear = WestSubdom.sort_values(by=['Year',])
+Hybrid_byYear = Hybrid.sort_values(by=['Year',])
+
+
+# Create a range of years in the dataset
+RangeOf_years1 = sorted(set(EastSub_byYear['Year']))
+RangeOf_years2 = sorted(set(PolarDom_byYear['Year']))
+RangeOf_years3 = sorted(set(SubtropicalDom_byYear['Year']))
+RangeOf_years4 = sorted(set(WestSubdom_byYear['Year']))
+RangeOf_years5 = sorted(set(Hybrid_byYear['Year']))
+
+
+# Create individual plots for each year for East Sub.
+for The_year1 in RangeOf_years1:
+    
+        plt.figure()
+        
+        # Sort the data for the current year 
+        year_data1 = EastSub_byYear[(EastSub_byYear['Year'] == The_year1)]
+        
+        # Create a Basemap of the US
+        map = Basemap(llcrnrlon=-125, llcrnrlat=20, urcrnrlon=-65, urcrnrlat=50, projection='merc', resolution='l')
+        
+        # Draw coastlines, countries, and states
+        map.drawcoastlines()
+        map.drawcountries()
+        map.drawstates()
+        
+        # Convert latitude and longitude to map coordinates
+        x1, y1 = map(list(year_data1['Event_Longitude']), list(year_data1['Event_Latitude']))
+        
+        # Plot the data points for the current year 
+        map.scatter(x1, y1, marker='o', color='r', zorder=5)
+        
+        # Add a delay (e.g., 2 seconds)
+        delay_iterations = 50000000  # Adjust the number of iterations for the desired delay
+        for _ in range(delay_iterations):
+            pass
+        
+        # Add title and show the plot
+        plt.title(f'Latitude and Longitude of Eastsub for Year {The_year1},')
+        plt.show()
+        
+# Create individual plots for each year for PolarDom.
+for The_year2 in RangeOf_years2:
+    
+        plt.figure()
+        
+        # Sort the data for the current year 
+        year_data2 = PolarDom_byYear[(PolarDom_byYear['Year'] == The_year2)]
+        
+        # Create a Basemap of the US
+        map = Basemap(llcrnrlon=-125, llcrnrlat=20, urcrnrlon=-65, urcrnrlat=50, projection='merc', resolution='l')
+        
+        # Draw coastlines, countries, and states
+        map.drawcoastlines()
+        map.drawcountries()
+        map.drawstates()
+        
+        # Convert latitude and longitude to map coordinates
+        x2, y2 = map(list(year_data2['Event_Longitude']), list(year_data2['Event_Latitude']))
+        
+        # Plot the data points for the current year 
+        map.scatter(x2, y2, marker='o', color='b', zorder=5)
+        
+        # Add a delay (e.g., 2 seconds)
+        delay_iterations = 50000000  # Adjust the number of iterations for the desired delay
+        for _ in range(delay_iterations):
+            pass
+        
+        # Add title and show the plot
+        plt.title(f'Latitude and Longitude of PolarDom for Year {The_year2},')
+        plt.show()
+        
+# Create individual plots for each year for SubtropicalDom.
+for The_year3 in RangeOf_years3:
+    
+        plt.figure()
+        
+        # Sort the data for the current year 
+        year_data3 = SubtropicalDom_byYear[(SubtropicalDom_byYear['Year'] == The_year3)]
+        
+        # Create a Basemap of the US
+        map = Basemap(llcrnrlon=-125, llcrnrlat=20, urcrnrlon=-65, urcrnrlat=50, projection='merc', resolution='l')
+        
+        # Draw coastlines, countries, and states
+        map.drawcoastlines()
+        map.drawcountries()
+        map.drawstates()
+        
+        # Convert latitude and longitude to map coordinates
+        x3, y3 = map(list(year_data3['Event_Longitude']), list(year_data3['Event_Latitude']))
+        
+        # Plot the data points for the current year 
+        map.scatter(x3, y3, marker='o', color='g', zorder=5)
+        
+        # Add a delay (e.g., 2 seconds)
+        delay_iterations = 50000000  # Adjust the number of iterations for the desired delay
+        for _ in range(delay_iterations):
+            pass
+        
+        # Add title and show the plot
+        plt.title(f'Latitude and Longitude of SubtropicalDom for Year {The_year3},')
+        plt.show()
+        
+# Create individual plots for each year for WestSubdom.
+for The_year4 in RangeOf_years4:
+    
+        plt.figure()
+        
+        # Sort the data for the current year 
+        year_data4 = WestSubdom_byYear[(WestSubdom_byYear['Year'] == The_year4)]
+        
+        # Create a Basemap of the US
+        map = Basemap(llcrnrlon=-125, llcrnrlat=20, urcrnrlon=-65, urcrnrlat=50, projection='merc', resolution='l')
+        
+        # Draw coastlines, countries, and states
+        map.drawcoastlines()
+        map.drawcountries()
+        map.drawstates()
+        
+        # Convert latitude and longitude to map coordinates
+        x4, y4 = map(list(year_data4['Event_Longitude']), list(year_data4['Event_Latitude']))
+        
+        # Plot the data points for the current year 
+        map.scatter(x4, y4, marker='o', color='y', zorder=5)
+        
+        # Add a delay (e.g., 2 seconds)
+        delay_iterations = 50000000  # Adjust the number of iterations for the desired delay
+        for _ in range(delay_iterations):
+            pass
+        
+        # Add title and show the plot
+        plt.title(f'Latitude and Longitude of WestSubdom for Year {The_year4},')
+        plt.show()
+        
+# Create individual plots for each year for Hybrid.
+for The_year5 in RangeOf_years5:
+    
+        plt.figure()
+        
+        # Sort the data for the current year 
+        year_data5 = Hybrid_byYear[(Hybrid_byYear['Year'] == The_year5)]
+        
+        # Create a Basemap of the US
+        map = Basemap(llcrnrlon=-125, llcrnrlat=20, urcrnrlon=-65, urcrnrlat=50, projection='merc', resolution='l')
+        
+        # Draw coastlines, countries, and states
+        map.drawcoastlines()
+        map.drawcountries()
+        map.drawstates()
+        
+        # Convert latitude and longitude to map coordinates
+        x5, y5 = map(list(year_data5['Event_Longitude']), list(year_data5['Event_Latitude']))
+        
+        # Plot the data points for the current year 
+        map.scatter(x5, y5, marker='o', color='c', zorder=5)
+        
+        # Add a delay (e.g., 2 seconds)
+        delay_iterations = 50000000  # Adjust the number of iterations for the desired delay
+        for _ in range(delay_iterations):
+            pass
+        
+        # Add title and show the plot
+        plt.title(f'Latitude and Longitude of Hybrid for Year {The_year5},')
+        plt.show()
